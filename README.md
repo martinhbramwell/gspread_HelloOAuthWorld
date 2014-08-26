@@ -1,5 +1,5 @@
-gspread_HelloOAuthWorld
-=======================
+Hello OAuth World for GSpread
+=============================
 
 
 The documentation for GSpread's authorize() method does little more than tell you to read Google's manuals.  For those with little experience with OAuth, unecessarily this may be a big problem, as in  -- many days down the drain.

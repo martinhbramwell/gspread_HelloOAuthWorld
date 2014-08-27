@@ -10,6 +10,7 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 #
+YOU=$(logname)
 # Make a temorary directory for installers
 mkdir -p ~/deleteMe
 #
@@ -39,6 +40,7 @@ rm -fr ~/deleteMe
 # Create a default directory for virtualized projects
 export WORKON_HOME=~/.python_virtual_environments
 mkdir -p $WORKON_HOME
+chown ${YOU}:${YOU} ~/.python_virtual_environments
 #
 # If not done before, put the control commands int the users execution environment
 hasMkvenv=$(cat ~/.bashrc | grep -c "mkvirtualenv")

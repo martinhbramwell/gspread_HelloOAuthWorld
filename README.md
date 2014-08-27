@@ -43,11 +43,11 @@ I don't want do be accused of wrecking anone's system.  Python is integral to th
 
 First we prepare for virtual environment management
 
+    pushd ~/disposable/gspread_HelloOAuthWorld
     sudo ./prepare_virtualenv.py
 
 We need a directory for our virtual project
 
-    pushd ~/disposable/gspread_HelloOAuthWorld
     mkdir -p ../venv
 
 We advise the virtual environment manager that it is there

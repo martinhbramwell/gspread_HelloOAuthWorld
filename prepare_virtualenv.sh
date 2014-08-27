@@ -34,10 +34,10 @@ pip install virtualenvwrapper
 popd
 #
 # Delete the temporary directory
-rm -fr deleteMe
+rm -fr ~/deleteMe
 #
 # Create a default directory for virtualized projects
-export WORKON_HOME=~/.python_vms
+export WORKON_HOME=~/.python_virtual_environments
 mkdir -p $WORKON_HOME
 #
 # If not done before, put the control commands int the users execution environment
@@ -49,7 +49,7 @@ if [ ${hasMkvenv} -lt 1 ] && [ ${hasWrpper} -lt 1 ] && [ ${hasPipCmp} -lt 1 ]; t
   pip completion --bash >> ~/.bashrc
   echo "export WORKON_HOME=$WORKON_HOME" >> ~/.bashrc
   echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
-  echo "alias mkvirtualenv='mkvirtualenv --no-site-packages --distribute'" >> ~/.bashrc
+  echo "alias mkvirtualenv='mkvirtualenv --no-site-packages'" >> ~/.bashrc
   echo "export PIP_REQUIRE_VIRTUALENV=true" >> ~/.bashrc
   echo "export PIP_VIRTUALENV_BASE=$WORKON_HOME" >> ~/.bashrc
   echo "#" >> ~/.bashrc

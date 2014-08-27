@@ -39,12 +39,16 @@ Here are the steps :
 <a name="Set up a Virtual Environment"/>
 ### Set up a Virtual Environment
 
-I don't want do be accused of wrecking anone's system.  Python is integral to the workings of Ubuntu and altering it willy-nilly is a bad idea.  Virtual environments protect you from that.
+I don't want do be accused of wrecking anyone's system.  Python is integral to the workings of Ubuntu and altering it willy-nilly is a bad idea.  Virtual environments protect you from that.
 
-First we prepare for virtual environment management
+First we check what the Python execution path looks like normally.
+
+    python -c "import sys; print sys.path"
+
+Now we can prepare for virtual environment management
 
     pushd ~/disposable/gspread_HelloOAuthWorld
-    sudo ./prepare_virtualenv.py
+    sudo ./prepare_virtualenv.sh
 
 We need a directory for our virtual project
 
@@ -55,7 +59,7 @@ We advise the virtual environment manager that it is there
     mkvirtualenv ../venv
     popd
 
-Check if the execution path is now fully self-contained
+Check if the execution path is now self-contained.  You should see 
 
     python -c "import sys; print sys.path"
 
@@ -65,7 +69,7 @@ Deactivate the created virtual project
 
 Reactivate the virtual project
 
-    workon venv
+    workon ../venv
 
 Check it again
 

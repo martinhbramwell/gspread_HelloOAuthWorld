@@ -28,8 +28,7 @@ Here are the steps :
     # Get the code
     git clone git@github.com:martinhbramwell/gspread_HelloOAuthWorld.git
     #
-    # Jump into it
-    pushd gspread_HelloOAuthWorld
+    popd
     #
     
 
@@ -48,11 +47,13 @@ First we prepare for virtual environment management
 
 We need a directory for our virtual project
 
+    pushd ~/disposable/gspread_HelloOAuthWorld
     mkdir -p ../venv
 
 We advise the virtual environment manager that it is there
 
     mkvirtualenv ../venv
+    popd
 
 Check if the execution path is now fully self-contained
 
@@ -78,6 +79,9 @@ Check it again
 <a name="Get Developer Credentials"/>
 ### Get Developer Credentials
 
+Resolve all dependencies
+
+    pip install oauth2client
 
 [Top](#Steps)
 

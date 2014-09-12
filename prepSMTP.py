@@ -28,6 +28,7 @@
 
 '''
 import urllib
+import argparse
 
 try :
 
@@ -62,19 +63,7 @@ import jsonio
 
 
 parameters_file = 'test_parms.py'
-try:
-    from test_parms import google_project_client_email
-    
-except ImportError:
 
-    google_project_client_email = raw_input('Enter the GMail address you want to authorize : ')
-    if not re.match("[^@]+@[^@]+\.[^@]+", google_project_client_email):
-      print 'Bad email.  Try again, or you can edit "{0}.example" and save as "{0}" before running the tests.'.format(parameters_file)
-      exit(-1)
-    print 'Got {0}.'.format(google_project_client_email)
-    with open(parameters_file, "w") as myfile:
-      myfile.write("google_project_client_email='%s'\n" % google_project_client_email)
-      
 SMTP_ACCESS = 'google_project_client_smtp_access_token'
 SMTP_REFRESH = 'google_project_client_smtp_refresh_token'
 SMTP_EXPIRY = 'google_project_client_smtp_expiry'
@@ -137,8 +126,26 @@ def update_parms_file(acc, ref, exp):
             myfile.write('\n#\n')
        
               
-def prep_smtp(creds, test_mail = False) :
+def prep_smtp(creds, client_email, test_mail = False) :
 
+    if client_email == None:
+      try:
+      
+          from test_parms import google_project_client_email
+          
+      except ImportError:
+
+          google_project_client_email = raw_input('Enter the GMail address you want to authorize : ')
+          if not re.match("[^@]+@[^@]+\.[^@]+", google_project_client_email):
+            print 'Bad email.  Try again, or you can edit "{0}.example" and save as "{0}" before running the tests.'.format(parameters_file)
+            exit(-1)
+          print 'Got {0}.'.format(google_project_client_email)
+          with open(parameters_file, "w") as myfile:
+            myfile.write("google_project_client_email='%s'\n" % google_project_client_email)
+            
+    else :
+      google_project_client_email= client_email
+    
     expiry = ''
     if configure_email :
     
@@ -199,11 +206,7 @@ def prep_smtp(creds, test_mail = False) :
                                             , access_token
                                             , base64_encode = False
                                         )
-    '''
-    print ">>>>"
-    print auth_string
-    print ">>>>"
-    '''
+    ### print auth_string
     
     # Preparing test email envelope . . 
     title = 'Trash this email'
@@ -249,11 +252,59 @@ def prep_smtp(creds, test_mail = False) :
     
     return
 
+
+
+PROG = "prepSMTP.py"
+
+desc = 'Get the access and refresh tokens for SMTP access to your GMail account.'
+desc += '  The values are added to the file test_parms.py.'
+desc += '  If file test_parms.py already have all the necessary parameters no'
+desc += ' action is taken.'
+
+msg_c = "to drop and create new credentials"
+msg_k = "The identity key of a Google Spreadsheets workbook."
+msg_r = "Row in Tasks sheet at which to start processing."
+
+
+def get():
+
+    usage = "usage: {} [options] arg".format(PROG)
+    parser = argparse.ArgumentParser(description=desc, prog=PROG)
+    
+    msg_j = 'A json file of Google OAuth credentials from '
+    msg_j += 'https://console.developers.google.com/ » [APIs & auth] » '
+    msg_j += '[Credentials] » [Client ID for native application]'
+    parser.add_argument(
+        '-j'
+      , '--client_id_json'
+      , help=msg_j
+      , required=True
+    )
+    parser.add_argument(
+        '-e'
+      , '--client_email'
+      , help='Your full GMail address [e.g. your.addr@gmail.com]'
+      , default=None
+      , required=False
+    )
+    parser.add_argument(
+        '-m'
+      , '--test_mail'
+      , help='Send a test email? (True|False) Default = False'
+      , default=False
+      , required=False
+    )
+
+    return parser.parse_args()
+
+
     
 def main():
     
-    creds = jsonio.getObj( "client_secret_142317537518-4je37ltkggi3vop85efmapq31iiejap0.apps.googleusercontent.com.json" )
-    oauth_credentials = prep_smtp(creds, test_mail = False)
+    args = get()
+    
+    creds = jsonio.getObj(  args.client_id_json )
+    oauth_credentials = prep_smtp(creds, args.client_email, args.test_mail)
     return
 
 if __name__ == '__main__':

@@ -2,9 +2,9 @@ Hello OAuth World for GSpread
 =============================
 
 
-The documentation for GSpread's authorize() method does little more than tell you to read Google's manuals.  For those with little experience with OAuth, unecessarily this may be a big problem, as in  -- many days down the drain.
+The documentation for GSpread's authorize() method does little more than tell you to read Google's manuals.  If you have small experience with OAuth, this can be a big problem, as in  -- many days down the drain.
 
-If you have Python in Ubuntu this should get you going.
+As long as you already have Python in Ubuntu this should get you going quickly.
 
 <a name="Steps"/>
 Here are the steps :
@@ -41,7 +41,7 @@ Here are the steps :
 
 I don't want do be accused of wrecking anyone's system.  Python is integral to the workings of Ubuntu and altering it willy-nilly is a bad idea.  Virtual environments protect you from that.
 
-First we check what the Python execution path looks like normally.
+First we check what the Python execution path looks like normally.  It contains directories like `/usr/local/...` and  `/usr/lib/...` etc.
 
     python -c "import sys; print sys.path"
 
@@ -50,16 +50,15 @@ Now we can prepare for virtual environment management
     pushd ~/disposable/gspread_HelloOAuthWorld
     sudo ./prepare_virtualenv.sh
 
-We need a directory for our virtual project
+The scripts create new environment variables and aliases that will be available on next log in.  To get them now, run this . . .
 
-    mkdir -p ../venv
+    source ~/.bashrc
 
-We advise the virtual environment manager that it is there
+We create a shadow directory holding the secluded execution environment for our project.
 
-    mkvirtualenv ../venv
-    popd
+    mkvirtualenv gspread_HelloOAuthWorld
 
-Check if the execution path is now self-contained.  You should see 
+Notice that your execution prompt is now prefixed with `(gspread_HelloOAuthWorld)`. Check if the execution path is now self-contained.  You should see numerous references to a directory `/home/yourself/.python_virtual_environments/gspread_HelloOAuthWorld/`
 
     python -c "import sys; print sys.path"
 
@@ -67,13 +66,21 @@ Deactivate the created virtual project
 
     deactivate
 
-Reactivate the virtual project
-
-    workon ../venv
-
-Check it again
+Check it again.  The `(gspread_HelloOAuthWorld)` prefix should be gone.
 
     python -c "import sys; print sys.path"
+
+Reactivate the virtual project.
+
+    workon gspread_HelloOAuthWorld
+
+Check it again.  The `(gspread_HelloOAuthWorld)` prefix should be back again.
+
+    python -c "import sys; print sys.path"
+
+Go back to where you were before
+
+    popd
 
 
 [Top](#Steps)

@@ -59,11 +59,13 @@ if [ ${hasMkvenv} -lt 1 ] && [ ${hasWrpper} -lt 1 ] && [ ${hasPipCmp} -lt 1 ]; t
 else
   echo "~/.bashrc untouched"
 fi
-# 
-source ~/.bashrc
 #
-echo "."
-echo "."
+echo " *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  "
+echo " * "
+echo " *   The changes made will not be useable until you run this command : "
+echo " * "
+echo "source ~/.bashrc"
+echo " * "
 echo "These are typical commands for managing virtual environments."
 echo "  mkvirtualenv test_dir"
 echo "  python -c \"import sys; print sys.path\""

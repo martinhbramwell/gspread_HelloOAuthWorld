@@ -1,0 +1,4 @@
+import os
+
+google_project_client_email = 'your.user.id@gmail.com'
+

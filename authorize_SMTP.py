@@ -19,16 +19,19 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-    Created on 2013-03-19
+    Created on 2014-09-15
 
     @author: Martin H. Bramwell
 
     This module:
-       This module is the main entry point for running the gOAuth generic client to Google document APIs.
+       This is a helper program to allow you to send emails to through your
+       your GMail account.
 
 '''
 import urllib
 import argparse
+
+import loadGoogleJSON
 
 try :
 
@@ -58,11 +61,7 @@ import re
 import traceback
 import datetime
 
-import jsonio
-
-
-
-parameters_file = 'test_parms.py'
+parameters_file = 'working_parameters.py'
 
 SMTP_ACCESS = 'google_project_client_smtp_access_token'
 SMTP_REFRESH = 'google_project_client_smtp_refresh_token'
@@ -73,8 +72,8 @@ gpcsat_len = 0
 gpcsrt_len = 0
 try:
 
-    from test_parms import google_project_client_smtp_access_token
-    from test_parms import google_project_client_smtp_refresh_token
+    from working_parameters import google_project_client_smtp_access_token
+    from working_parameters import google_project_client_smtp_refresh_token
     
     gpcsat_len = len(google_project_client_smtp_access_token)
     gpcsrt_len = len(google_project_client_smtp_refresh_token)
@@ -85,7 +84,7 @@ try:
 except :
 
     configure_email = True
-    print 'No valid token pair found in test_parms.py. Will run the wizard.'
+    print 'No valid token pair found in {}. Will run the wizard.'.format(parameters_file)
 #    print 'Lengths : Access Token = {}, Refresh Token = {}.'.format(gpcsat_len, gpcsrt_len)
 
 import fileinput
@@ -131,7 +130,7 @@ def prep_smtp(creds, client_email, test_mail = False) :
     if client_email == None:
       try:
       
-          from test_parms import google_project_client_email
+          from working_parameters import google_project_client_email
           
       except ImportError:
 
@@ -184,14 +183,14 @@ def prep_smtp(creds, client_email, test_mail = False) :
         print ' - Access Token expires at : %s' % expiry
 
         
-        print 'Appending latest tokens to the bottom of the file "test_parms.py". . . '
+        print 'Appending latest tokens to the bottom of the file "{}". . . '.format(parameters_file)
         update_parms_file(access_token, refresh_token, expiry)
         print ' . . done.\n'
             
         
     else :
     
-        print 'An SMTP access token pair is already registered in "test_parms.py"'
+        print 'An SMTP access token pair is already registered in "{}"'.format(parameters_file)
         access_token = google_project_client_smtp_access_token
         refresh_token = google_project_client_smtp_refresh_token    
 
@@ -242,7 +241,7 @@ def prep_smtp(creds, client_email, test_mail = False) :
                     print sr
                     if sr[0] == 535 :
                         print 'The access token is correct. Maybe the user id is wrong?'
-                        print '¿¿ Are you sure that <[{0}]> authorized <[{0}]> ??'.format(google_project_client_email)
+                        print '¿ Are you sure that <[{0}]> authorized <[{0}]> ?'.format(google_project_client_email)
                         exit(-1)
 
 
@@ -257,8 +256,8 @@ def prep_smtp(creds, client_email, test_mail = False) :
 PROG = "prepSMTP.py"
 
 desc = 'Get the access and refresh tokens for SMTP access to your GMail account.'
-desc += '  The values are added to the file test_parms.py.'
-desc += '  If file test_parms.py already have all the necessary parameters no'
+desc += '  The values are added to the file {}.'.format(parameters_file)
+desc += '  If file {} already have all the necessary parameters no'.format(parameters_file)
 desc += ' action is taken.'
 
 msg_c = "to drop and create new credentials"
@@ -278,7 +277,7 @@ def get():
         '-j'
       , '--client_id_json'
       , help=msg_j
-      , required=True
+      , required=False
     )
     parser.add_argument(
         '-e'
@@ -302,8 +301,10 @@ def get():
 def main():
     
     args = get()
-    
-    creds = jsonio.getObj(  args.client_id_json )
+
+#    creds = jsonio.getObj(  args.client_id_json )
+    creds = loadGoogleJSON.getCreds(args.client_id_json)
+    open(parameters_file, 'a').close()
     oauth_credentials = prep_smtp(creds, args.client_email, args.test_mail)
     return
 

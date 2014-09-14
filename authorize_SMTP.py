@@ -28,7 +28,9 @@
        your GMail account.
 
 '''
+import os
 import urllib
+import logging
 import argparse
 
 import loadGoogleJSON
@@ -66,6 +68,7 @@ parameters_file = 'working_parameters.py'
 SMTP_ACCESS = 'google_project_client_smtp_access_token'
 SMTP_REFRESH = 'google_project_client_smtp_refresh_token'
 SMTP_EXPIRY = 'google_project_client_smtp_expiry'
+CLIENT_EMAIL = 'google_project_client_email'
 configure_email = False
 
 gpcsat_len = 0
@@ -88,7 +91,7 @@ except :
 #    print 'Lengths : Access Token = {}, Refresh Token = {}.'.format(gpcsat_len, gpcsrt_len)
 
 import fileinput
-def update_parms_file(acc, ref, exp):
+def update_parms_file(acc, ref, exp, cgm):
 
     acc_parm = "%s = '%s'" % (SMTP_ACCESS, acc)
     a = True
@@ -98,6 +101,9 @@ def update_parms_file(acc, ref, exp):
     
     exp_parm = "%s = '%s'" % (SMTP_EXPIRY, exp)
     x = True
+    
+    cgm_parm = "%s = '%s'" % (CLIENT_EMAIL, cgm)
+    g = True
     
     
     for line in fileinput.input(parameters_file, inplace=1):
@@ -110,6 +116,9 @@ def update_parms_file(acc, ref, exp):
       elif line.startswith(SMTP_EXPIRY) :
           print exp_parm
           r = False
+      elif line.startswith(CLIENT_EMAIL) :
+          print cgm_parm
+          g = False
       else :
           print line,
     
@@ -122,6 +131,8 @@ def update_parms_file(acc, ref, exp):
                 myfile.write('\n%s' % ref_parm)
             if x :
                 myfile.write('\n%s' % exp_parm)
+            if g :
+                myfile.write('\n%s' % cgm_parm)
             myfile.write('\n#\n')
        
               
@@ -138,12 +149,10 @@ def prep_smtp(creds, client_email, test_mail = False) :
           if not re.match("[^@]+@[^@]+\.[^@]+", google_project_client_email):
             print 'Bad email.  Try again, or you can edit "{0}.example" and save as "{0}" before running the tests.'.format(parameters_file)
             exit(-1)
-          print 'Got {0}.'.format(google_project_client_email)
-          with open(parameters_file, "w") as myfile:
-            myfile.write("google_project_client_email='%s'\n" % google_project_client_email)
             
     else :
-      google_project_client_email= client_email
+      google_project_client_email = client_email
+
     
     expiry = ''
     if configure_email :
@@ -184,7 +193,7 @@ def prep_smtp(creds, client_email, test_mail = False) :
 
         
         print 'Appending latest tokens to the bottom of the file "{}". . . '.format(parameters_file)
-        update_parms_file(access_token, refresh_token, expiry)
+        update_parms_file(access_token, refresh_token, expiry, google_project_client_email)
         print ' . . done.\n'
             
         
@@ -253,17 +262,19 @@ def prep_smtp(creds, client_email, test_mail = False) :
 
 
 
-PROG = "prepSMTP.py"
+pth = os.path.realpath(__file__)
+PROG = pth.split(os.sep)[pth.count(os.sep)]
 
 desc = 'Get the access and refresh tokens for SMTP access to your GMail account.'
 desc += '  The values are added to the file {}.'.format(parameters_file)
 desc += '  If file {} already have all the necessary parameters no'.format(parameters_file)
 desc += ' action is taken.'
 
+'''
 msg_c = "to drop and create new credentials"
 msg_k = "The identity key of a Google Spreadsheets workbook."
 msg_r = "Row in Tasks sheet at which to start processing."
-
+'''
 
 def get():
 
@@ -302,13 +313,17 @@ def main():
     
     args = get()
 
-#    creds = jsonio.getObj(  args.client_id_json )
     creds = loadGoogleJSON.getCreds(args.client_id_json)
     open(parameters_file, 'a').close()
     oauth_credentials = prep_smtp(creds, args.client_email, args.test_mail)
     return
 
 if __name__ == '__main__':
+
+    logging.FileHandler('python.log', mode='a')
+    logger = logging.getLogger(PROG)
+    logger.setLevel('DEBUG')
+#    logger.setLevel('WARNING')
 
     main()
     exit(0)

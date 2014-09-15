@@ -14,7 +14,14 @@ This Hello World shows you how to perform two different sequences :
   2. get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Devices](http://goo.gl/EGfc8e).
 
 The included program [authorize_SMTP.py](http://goo.gl/nBJ3bE) works in accordance with this sequence:
-![http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png).  It prepares and displays a URL that includeas a request token, and then prompts you to enter an authoriztion code.  When you open the URL in a browser, you will need to log in to Google (if you haven't done so earlier) and consent to the indicated permissions.  You then copy the resulting code back into the command line of *authorize_SMTP.py*.  It then writes to disk a file called "working_parameters.py".  Imported into any other Python program, that file provides the access and refresh tokens for using GMail as an SMTP mail transfer service.
+![http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png)
+
+<p align="center">
+  <img src="http://i.imgur.com/HAuXGjA.png" alt="Sublime's custom image"/>
+</p>
+
+
+It prepares and displays a URL that includeas a request token, and then prompts you to enter an authoriztion code.  When you open the URL in a browser, you will need to log in to Google (if you haven't done so earlier) and consent to the indicated permissions.  You then copy the resulting code back into the command line of *authorize_SMTP.py*.  It then writes to disk a file called "working_parameters.py".  Imported into any other Python program, that file provides the access and refresh tokens for using GMail as an SMTP mail transfer service.
 
 The included program [request_authorization.py](http://goo.gl/MiqfQ4) works in accordance with this sequence ![http://imgur.com/delete/CurGk13H48bjiMf](http://i.imgur.com/zGuwWFZ.png)    It connects to Google and obtains a URL and authorization code for accessing a thrid-party's Google Sheets, then prepares an email and sends it to any individual recipient you indicate. The text of the email explains to the receipient the purpose of the authorization code and provides a hyperlink to the authorization page.  Your user simply has to copy and paste the procided code into the field presented at that URL, and then consent to the indicated access permissions on Google Sheets.  Meanwhile, from the moment it sends the email, *request_authorization.py* sits in a slow loop waiting for 30 minutes, for the user to react.  If your user does indeed authorize you, *request_authorization.py* request from you the URL of one of your user's Google Sheets workbooks, then writes two files to disk: a new credentials file called "creds_oa.py", and an executable Python script "gspread_HelloOAuthWorld.py".  The latter uses the former and GSpread to get the name of the first sheet of your user's workbook. 
 

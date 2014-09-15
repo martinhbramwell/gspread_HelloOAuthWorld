@@ -145,7 +145,7 @@ Run the program [authorize_SMTP.py](https://github.com/martinhbramwell/gspread_H
     
     ./authorize_SMTP.py 
     
-Since this is the first time you run it will ask for all details.  It remembers them, so that you have less to do on subsequent operations.
+Since this is the first time you run it, it will ask for all details.  It remembers them so that you have less to do on subsequent operations.
 
     No valid token pair found in working_parameters.py. Will run the wizard.
     Enter the GMail address you want to authorize : *<enter a GMail address here>*
@@ -162,10 +162,19 @@ Provide the GMail address for which you want to be authenticated as the official
 
 Copy that url into a browser, follow the steps, then get the verification code and paste it into the field of the prompt "Enter verification code:" 
 
-[http://imgur.com/delete/tJ2iaEVdSEmTxzS](http://i.imgur.com/cOaktkZ.png)
-[http://imgur.com/delete/XUaxsXgqrqnfIar](http://i.imgur.com/ZaSKGlS.png)
+
+#### "User login and consent" step . . . 
+<p align="center">
+  <img src="http://i.imgur.com/cOaktkZ.png" alt="http://imgur.com/delete/tJ2iaEVdSEmTxzS"/>
+</p>
+
+#### "Authorization code" response step . . . 
+<p align="center">
+  <img src="http://i.imgur.com/ZaSKGlS.png" alt="http://imgur.com/delete/XUaxsXgqrqnfIar"/>
+</p>
 
 
 [Top](#Steps)
 
 asdfasdf
+

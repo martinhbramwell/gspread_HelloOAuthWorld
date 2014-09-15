@@ -44,7 +44,7 @@ Here are the steps :
   1. [Get the code](#Get the code)
   1. [Start up a Virtual Environment](#Start up a Virtual Environment)
   1. [Get Developer Credentials](#Get Developer Credentials)
-  1. [Get Developer Credentials](#Get Developer Credentials)
+  1. [Authenticate and self-authorize GMail SMTP use.](#Authenticate and self-authorize GMail SMTP use.)
   2. 
   3. 
 
@@ -95,9 +95,9 @@ The scripts create new environment variables and aliases that will be available 
 
 We create a shadow directory holding the secluded execution environment for our project.
 
-    mkvirtualenv gspread_HelloOAuthWorld
+    mkvirtualenv hiOAWorld
 
-Notice that your execution prompt is now prefixed with `(gspread_HelloOAuthWorld)`. Check if the execution path is now self-contained.  You should see numerous references to a directory `/home/yourself/.python_virtual_environments/gspread_HelloOAuthWorld/`
+Notice that your execution prompt is now prefixed with `(hiOAWorld)`. Check if the execution path is now self-contained.  You should see numerous references to a directory `/home/yourself/.python_virtual_environments/hiOAWorld/`
 
     python -c "import sys; print sys.path"
 
@@ -105,15 +105,15 @@ Deactivate the created virtual project
 
     deactivate
 
-Check it again.  The `(gspread_HelloOAuthWorld)` prefix should be gone.
+Check it again.  The `(hiOAWorld)` prefix should be gone.
 
     python -c "import sys; print sys.path"
 
 Reactivate the virtual project.
 
-    workon gspread_HelloOAuthWorld
+    workon hiOAWorld
 
-Check it again.  The `(gspread_HelloOAuthWorld)` prefix should be back again.
+Check it again.  The `(hiOAWorld)` prefix should be back again.
 
     python -c "import sys; print sys.path"
 
@@ -129,19 +129,42 @@ Go back to where you were before
 <a name="Get Developer Credentials"/>
 ### Get Developer Credentials
 
-The included utility [loadGoogleJSON.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/loadGoogleJSON.py) reads Google's OAuth credentials out of a JSON file available from [Google's Developer API console](https://console.developers.google.com/).  Follow these steps for [Obtaining Authentication Credentials from Google's new style API Console](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/wiki/Obtaining-Authentication-Credentials-from-Google's-new-style-API-Console).
+The included utility [loadGoogleJSON.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/loadGoogleJSON.py) reads Google's OAuth credentials out of a JSON file that you have to download from [Google's Developer API console](https://console.developers.google.com/).
+
+Follow these steps for [Obtaining Authentication Credentials from Google's new style API Console](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/wiki/Obtaining-Authentication-Credentials-from-Google's-new-style-API-Console).
 
 
 [Top](#Steps)
 
   
 - - - - - - - - - - - - -
-<a name="Get Developer Credentials"/>
-### Get Developer Credentials
+<a name="Authenticate and self-authorize GMail SMTP use."/>
+### Authenticate and self-authorize GMail SMTP use.
 
-Resolve all dependencies
+Run the program [authorize_SMTP.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/authorize_SMTP.py)
+    
+    ./authorize_SMTP.py 
+    
+Since this is the first time you run it will ask for all details.  It remembers them, so that you have less to do on subsequent operations.
 
-    pip install oauth2client
+    No valid token pair found in working_parameters.py. Will run the wizard.
+    Enter the GMail address you want to authorize : *<enter a GMail address here>*
+    
+Provide the GMail address for which you want to be authenticated as the official user for SMTP mail transfer, and you will be prompted as follows :
+
+        To be able to request authorization from your users by email, you need to authorize this program to use Google's email resender in your name.
+        Visit this url and follow the directions:
+
+      https://accounts.google.com/o/oauth2/auth?client_id=181927152960-1525sfbj8lr7kh83q8q24f6rkijupfgk.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=https%3A%2F%2Fmail.google.com%2F
+
+
+        * * * Enter verification code:  <put the resulting code here>
+
+Copy that url into a browser, follow the steps, then get the verification code and paste it into the field of the prompt "Enter verification code:" 
+
+[http://imgur.com/delete/tJ2iaEVdSEmTxzS](http://i.imgur.com/cOaktkZ.png)
+[http://imgur.com/delete/XUaxsXgqrqnfIar](http://i.imgur.com/ZaSKGlS.png)
+
 
 [Top](#Steps)
 

@@ -4,13 +4,16 @@ Hello OAuth World for GSpread
 
 The documentation for GSpread's authorize() method does little more than tell you to read Google's manuals.  If you have small experience with OAuth, this can be a big problem, as in  -- many days down the drain.
 
-As long as you already have Python in Ubuntu this should get you going quickly.
+This example should get you going quickly as long as you already have:
+ - Python running in Ubuntu
+ - 
 
 <a name="Steps"/>
 Here are the steps :
 
   1. [Get the code](#Get the code)
   1. [Set up a Virtual Environment](#Set up a Virtual Environment)
+  1. [Get Developer Credentials](#Get Developer Credentials)
   1. [Get Developer Credentials](#Get Developer Credentials)
   2. 
   3. 
@@ -26,7 +29,13 @@ Here are the steps :
     pushd ~/disposable
     #
     # Get the code
-    git clone git@github.com:martinhbramwell/gspread_HelloOAuthWorld.git
+    wget https://github.com/martinhbramwell/gspread_HelloOAuthWorld/archive/master.zip
+    #
+    # unpack it
+    unzip master.zip
+    #
+    # give it its real name
+    mv gspread_HelloOAuthWorld-master gspread_HelloOAuthWorld
     #
     popd
     #
@@ -41,7 +50,7 @@ Here are the steps :
 
 I don't want do be accused of wrecking anyone's system.  Python is integral to the workings of Ubuntu and altering it willy-nilly is a bad idea.  Virtual environments protect you from that.
 
-First we check what the Python execution path looks like normally.  It contains directories like `/usr/local/...` and  `/usr/lib/...` etc.
+First we check what the Python execution path looks like normally.  It contains directories like `/usr/local/...` and  `/usr/lib/...` etc.  That's what we do *not* want to mess up.
 
     python -c "import sys; print sys.path"
 
@@ -90,6 +99,7 @@ Go back to where you were before
 <a name="Get Developer Credentials"/>
 ### Get Developer Credentials
 
+The included utility [loadGoogleJSON.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/loadGoogleJSON.py) reads Google's OAuth credentials out of a JSON file available from here
 Resolve all dependencies
 
     pip install oauth2client

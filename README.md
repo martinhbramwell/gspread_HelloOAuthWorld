@@ -6,13 +6,15 @@ Currently, GSpread's documentation for its authorize() method does little more t
 
 This example should get you going quickly, as long as you already have Python running in Ubuntu.  Everything else is explained step by step.
 
-Note that that OAuth has several versions and numerous distinct sequences of operations for different purposes and circumstances.  One of the trickiest parts of learning OAuth is that different document authors use different terminology to refer to the same sequence or simply fail to clarify which sequence or version is being described.
+Note that that OAuth has several versions and numerous distinct sequences of operations for different purposes and circumstances.  One of the trickiest parts of learning OAuth is that different document authors use different terminology to refer to the same sequence or simply fail to clarify which sequence or version they're talking about.
 
-This Hello World shows you how to perform two different sequences :
+This Hello World shows you how to perform these two different sequences :
 
   1. authenticate and authorize yourself to use your own GMail account as a mail transfer service for your Python programs.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](http://goo.gl/CLzxPZ).
   2. get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Devices](http://goo.gl/EGfc8e).
 
+<a name="authorize_SMTP.py"/>
+### authorize_SMTP.py
 The included program [authorize_SMTP.py](http://goo.gl/nBJ3bE) works in accordance with this sequence:
 
 <p align="center">
@@ -22,6 +24,9 @@ The included program [authorize_SMTP.py](http://goo.gl/nBJ3bE) works in accordan
 
 It prepares and displays a URL that includes a request token, and then prompts you to enter an authorization code.  When you open the URL in a browser, you will need to log in to Google (if you haven't done so earlier) and consent to the indicated permissions.  You then copy the resulting code back into the command line of [authorize_SMTP.py](http://goo.gl/nBJ3bE).  It will write to disk a file called *"working_parameters.py"*.  Imported into any other Python program, that file will provide the access and refresh tokens for using GMail as an SMTP mail transfer service.
 
+
+<a name="request_authorization.py"/>
+### request_authorization
 The included program [request_authorization.py](http://goo.gl/MiqfQ4) works in accordance with this sequence :
 <p align="center">
   <img src="http://i.imgur.com/zGuwWFZ.png" alt="http://imgur.com/delete/CurGk13H48bjiMf"/>

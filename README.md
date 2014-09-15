@@ -6,8 +6,21 @@ Currently, GSpread's documentation for its authorize() method does little more t
 
 This example should get you going quickly as long as you already have Python running in Ubuntu.  Everything else is explained step by step.
 
-Note that this describes the more complicated OAuth pattern 
- 
+Note that that OAuth has several versions and numerous distinct sequences of operations for different purposes and circumstances.  One of the trickiest parts of learning OAuth is that different document authors use different terminology to refer to the same sequence or simply fail to clarify which sequence or version is being described.
+
+This Hello World shows how to perform two different sequences :
+
+  1. how to authenticate and authorize yourself to use your own GMail account as a mail transfer service for your Python programs.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/accounts/docs/OAuth2WebServer).
+  2. how to get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/accounts/docs/OAuth2WebServer).
+
+The included program [authorize_SMTP.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/)  
+works in accordance with this sequence [http://imgur.com/delete/CurGk13H48bjiMf](http://i.imgur.com/zGuwWFZ.png)
+
+displays the URL of a
+
+The included program [request_authorization.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/request_authorization.py)  
+works in accordance with this sequence [http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png)
+
 
 <a name="Steps"/>
 Here are the steps :

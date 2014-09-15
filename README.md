@@ -14,7 +14,7 @@ This Hello World shows you how to perform these two different sequences :
   2. get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Devices](http://goo.gl/EGfc8e).
 
 <a name="authorize_SMTP.py"/>
-#### authorize_SMTP.py
+##### authorize_SMTP.py
 The included program [authorize_SMTP.py](http://goo.gl/nBJ3bE) works in accordance with this sequence:
 
 <p align="center">
@@ -26,15 +26,15 @@ It prepares and displays a URL that includes a request token, and then prompts y
 
 
 <a name="request_authorization.py"/>
-### request_authorization
+##### request_authorization.py
 The included program [request_authorization.py](http://goo.gl/MiqfQ4) works in accordance with this sequence :
 <p align="center">
   <img src="http://i.imgur.com/zGuwWFZ.png" alt="http://imgur.com/delete/CurGk13H48bjiMf"/>
 </p>
 
-It connects to Google and obtains a URL and authorization code for accessing a thrid-party's Google Sheets, then prepares an email and sends it to any individual recipient you indicate. The text of the email explains to the recipient the purpose of the authorization code and provides a hyperlink to the authorization page.  Your user simply has to copy and paste the provided code into the field presented at that URL, and then consent to the indicated access permissions on Google Sheets.
+It connects to Google and obtains a URL and authorization code for accessing a thrid-party's Google Sheets, then prepares an email and sends it to that individual. The text of the email explains to them the purpose of the authorization code and provides a hyperlink to the authorization page.  They simply have to copy and paste the provided code into the field presented at that URL, and then consent to the indicated access permissions on Google Sheets.
 
-Meanwhile, from the moment it sends the email, [request_authorization.py](http://goo.gl/MiqfQ4) sits in a slow loop waiting for 30 minutes, for the user to react.  If your user does indeed authorize you, [request_authorization.py](http://goo.gl/MiqfQ4) will prompt you to enter the URL of one of your user's Google Sheets workbooks, then writes two files to disk: a new credentials file called *"creds_oa.py"*, and an executable Python script *"gspread_HelloOAuthWorld.py"*.  The latter uses the former and GSpread to get and display the name of the first sheet of your user's workbook. 
+Meanwhile, from the moment it sends the email, [request_authorization.py](http://goo.gl/MiqfQ4) sits in a slow loop waiting for 30 minutes, for your user to react.  If they do indeed authorize you, [request_authorization.py](http://goo.gl/MiqfQ4) will prompt you to enter the URL of one of their Google Sheets workbooks, then writes two files to disk: a new credentials file called *"creds_oa.py"*, and an executable Python script *"gspread_HelloOAuthWorld.py"*.  The latter uses the former and GSpread to get and display the name of the first sheet of your user's workbook. 
 
 
 

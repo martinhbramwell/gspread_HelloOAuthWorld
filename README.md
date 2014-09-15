@@ -2,17 +2,18 @@ Hello OAuth World for GSpread
 =============================
 
 
-The documentation for GSpread's authorize() method does little more than tell you to read Google's manuals.  If you have small experience with OAuth, this can be a big problem, as in  -- many days down the drain.
+Currently, GSpread's documentation for its authorize() method does little more than tell you to read Google's manuals.  If you have small experience with OAuth, this can be a big problem, as in  -- many days down the drain.
 
-This example should get you going quickly as long as you already have:
- - Python running in Ubuntu
- - 
+This example should get you going quickly as long as you already have Python running in Ubuntu.  Everything else is explained step by step.
+
+Note that this describes the more complicated OAuth pattern 
+ 
 
 <a name="Steps"/>
 Here are the steps :
 
   1. [Get the code](#Get the code)
-  1. [Set up a Virtual Environment](#Set up a Virtual Environment)
+  1. [Start up a Virtual Environment](#Start up a Virtual Environment)
   1. [Get Developer Credentials](#Get Developer Credentials)
   1. [Get Developer Credentials](#Get Developer Credentials)
   2. 
@@ -45,10 +46,10 @@ Here are the steps :
 
   
 - - - - - - - - - - - - -
-<a name="Set up a Virtual Environment"/>
-### Set up a Virtual Environment
+<a name="Start up a Virtual Environment"/>
+### Start up a Virtual Environment
 
-I don't want do be accused of wrecking anyone's system.  Python is integral to the workings of Ubuntu and altering it willy-nilly is a bad idea.  Virtual environments protect you from that.
+I don't want to be accused of wrecking anyone's system.  Python is integral to the workings of Ubuntu and altering it willy-nilly is a bad idea.  Virtual environments protect you from that.
 
 First we check what the Python execution path looks like normally.  It contains directories like `/usr/local/...` and  `/usr/lib/...` etc.  That's what we do *not* want to mess up.
 
@@ -101,6 +102,13 @@ Go back to where you were before
 
 The included utility [loadGoogleJSON.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/loadGoogleJSON.py) reads Google's OAuth credentials out of a JSON file available from [Google's Developer API console](https://console.developers.google.com/).  Follow these steps for [Obtaining Authentication Credentials from Google's new style API Console](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/wiki/Obtaining-Authentication-Credentials-from-Google's-new-style-API-Console).
 
+
+[Top](#Steps)
+
+  
+- - - - - - - - - - - - -
+<a name="Get Developer Credentials"/>
+### Get Developer Credentials
 
 Resolve all dependencies
 

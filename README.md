@@ -8,10 +8,10 @@ This example should get you going quickly, as long as you already have Python ru
 
 Note that that OAuth has several versions and numerous distinct sequences of operations for different purposes and circumstances.  One of the trickiest parts of learning OAuth is that different document authors use different terminology to refer to the same sequence or simply fail to clarify which sequence or version is being described.
 
-This Hello World shows how to perform two different sequences :
+This Hello World shows you how to perform two different sequences :
 
-  1. how to authenticate and authorize yourself to use your own GMail account as a mail transfer service for your Python programs.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/accounts/docs/OAuth2WebServer).
-  2. how to get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/accounts/docs/OAuth2WebServer).
+  1. authenticate and authorize yourself to use your own GMail account as a mail transfer service for your Python programs.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](http://goo.gl/CLzxPZ).
+  2. get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Devices](http://goo.gl/EGfc8e).
 
 The included program [authorize_SMTP.py](http://goo.gl/nBJ3bE) works in accordance with this sequence:
 ![http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png).  It prepares and displays a URL that includeas a request token, and then prompts you to enter an authoriztion code.  When you open the URL in a browser, you will need to log in to Google (if you haven't done so earlier) and consent to the indicated permissions.  You then copy the resulting code back into the command line of *authorize_SMTP.py*.  It then writes to disk a file called "working_parameters.py".  Imported into any other Python program, that file provides the access and refresh tokens for using GMail as an SMTP mail transfer service.

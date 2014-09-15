@@ -4,7 +4,7 @@ Hello OAuth World for GSpread
 
 Currently, GSpread's documentation for its authorize() method does little more than tell you to read Google's manuals.  If you have small experience with OAuth, this can be a big problem, as in  -- many days down the drain.
 
-This example should get you going quickly as long as you already have Python running in Ubuntu.  Everything else is explained step by step.
+This example should get you going quickly, as long as you already have Python running in Ubuntu.  Everything else is explained step by step.
 
 Note that that OAuth has several versions and numerous distinct sequences of operations for different purposes and circumstances.  One of the trickiest parts of learning OAuth is that different document authors use different terminology to refer to the same sequence or simply fail to clarify which sequence or version is being described.
 
@@ -13,13 +13,11 @@ This Hello World shows how to perform two different sequences :
   1. how to authenticate and authorize yourself to use your own GMail account as a mail transfer service for your Python programs.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/accounts/docs/OAuth2WebServer).
   2. how to get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/accounts/docs/OAuth2WebServer).
 
-The included program [authorize_SMTP.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/)  
-works in accordance with this sequence   ![http://imgur.com/delete/CurGk13H48bjiMf](http://i.imgur.com/zGuwWFZ.png)
+The included program [authorize_SMTP.py](http://goo.gl/Zb3FZX) works in accordance with this sequence:
+![http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png).  It prepares and displays a URL that includeas a request token, and then prompts you to enter an authoriztion code.  When you open the URL in a browser, you will need to log in to Google (if you haven't done so earlier) and consent to the indicated permissions.  You then copy the resulting code back into the command line of *authorize_SMTP.py*.  It then writes to disk a file called "working_parameters.py".  Imported into any other Python program, that file provides the access and refresh tokens for using GMail as an SMTP mail transfer service.
 
-displays the URL of a
+The included program [request_authorization.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/request_authorization.py) works in accordance with this sequence ![http://imgur.com/delete/CurGk13H48bjiMf](http://i.imgur.com/zGuwWFZ.png)    It connects to Google and obtains a URL and authorization code for accessing a thrid-party's Google Sheets, then prepares an email and sends it to any individual recipient you indicate. The text of the email explains to the receipient the purpose of the authorization code and provides a hyperlink to the authorization page.  Your user simply has to copy and paste the procided code into the field presented at that URL, and then consent to the indicated access permissions on Google Sheets.  Meanwhile, from the moment it sends the email, *request_authorization.py* sits in a slow loop waiting for 30 minutes, for the user to react.  If your user does indeed authorize you, *request_authorization.py* request from you the URL of one of your user's Google Sheets workbooks, then writes two files to disk: a new credentials file called "creds_oa.py", and an executable Python script "gspread_HelloOAuthWorld.py".  The latter uses the former and GSpread to get the name of the first sheet of your user's workbook. 
 
-The included program [request_authorization.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/request_authorization.py)  
-works in accordance with this sequence ![http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png)
 
 
 <a name="Steps"/>

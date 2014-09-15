@@ -99,7 +99,9 @@ Go back to where you were before
 <a name="Get Developer Credentials"/>
 ### Get Developer Credentials
 
-The included utility [loadGoogleJSON.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/loadGoogleJSON.py) reads Google's OAuth credentials out of a JSON file available from here
+The included utility [loadGoogleJSON.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/loadGoogleJSON.py) reads Google's OAuth credentials out of a JSON file available from [Google's Developer API console](https://console.developers.google.com/).  Follow these steps for [Obtaining Authentication Credentials from Google's new style API Console](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/wiki/Obtaining-Authentication-Credentials-from-Google's-new-style-API-Console).
+
+
 Resolve all dependencies
 
     pip install oauth2client

@@ -14,7 +14,7 @@ This Hello World shows you how to perform these two different sequences :
   2. get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Devices](http://goo.gl/EGfc8e).
 
 <a name="authorize_SMTP.py"/>
-### authorize_SMTP.py
+## authorize_SMTP.py
 The included program [authorize_SMTP.py](http://goo.gl/nBJ3bE) works in accordance with this sequence:
 
 <p align="center">

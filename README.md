@@ -14,12 +14,12 @@ This Hello World shows how to perform two different sequences :
   2. how to get a third-party to authorize you to access their Google Sheets.  It uses the OAuth sequence described in [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/accounts/docs/OAuth2WebServer).
 
 The included program [authorize_SMTP.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/)  
-works in accordance with this sequence [http://imgur.com/delete/CurGk13H48bjiMf](http://i.imgur.com/zGuwWFZ.png)
+works in accordance with this sequence   ![http://imgur.com/delete/CurGk13H48bjiMf](http://i.imgur.com/zGuwWFZ.png)
 
 displays the URL of a
 
 The included program [request_authorization.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/request_authorization.py)  
-works in accordance with this sequence [http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png)
+works in accordance with this sequence ![http://imgur.com/delete/DAT65Rc0ipSc3BY](http://i.imgur.com/HAuXGjA.png)
 
 
 <a name="Steps"/>

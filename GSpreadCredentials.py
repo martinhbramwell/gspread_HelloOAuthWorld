@@ -44,7 +44,7 @@ GOOGLE_OAUTH_TOKEN_REFRESH_URL = "https://accounts.google.com/o/oauth2/token"
 class GSpreadCredentials (object):
 
   def __init__ (self, access_token_=None, key_ring_=None):
-    print"#################### {}".format(access_token_)
+#    print"## {} ##".format(access_token_)
     self.access_token = access_token_
     self.key_ring = key_ring_
 
@@ -53,7 +53,7 @@ class GSpreadCredentials (object):
     Performs a token refresh cycle as described here :
        https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Refreshing_a_Token
     '''
-    print "Key ring has : {}".format(self.key_ring['refresh_token'])
+#    print "Key ring has : {}".format(self.key_ring['refresh_token'])
     parms = urlencode(self.key_ring)
     req_hdrs = {'Content-Type': 'application/x-www-form-urlencoded'}
     url = urlparse(GOOGLE_OAUTH_TOKEN_REFRESH_URL).netloc

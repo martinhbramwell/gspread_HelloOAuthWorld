@@ -47,8 +47,7 @@ Here are the steps :
   1. [Get Developer Credentials](#Get Developer Credentials)
   1. [Authenticate and self-authorize GMail SMTP use.](#Authenticate and self-authorize GMail SMTP use.)
   1. [Get permission on other user's spreadsheet.](#Get permission on other user's spreadsheet.)
-  2. 
-  3. 
+  2. [Running ./gspread_HelloOAuthWorld.py.](#Running ./gspread_HelloOAuthWorld.py)
 
 - - - - - - - - - - - - -
 <a name="Get the code"/>
@@ -267,36 +266,47 @@ If your user takes longer than 30 minutes you'll have to try again.
 
 If your user does approve the *"./request_authorization.py"* program will continue to the next step with a screen like this :
 
-        Code fragment to use to configure the gspread 'nose' tests.  Paste into the file 'test.config' : 
-        .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
+    Code fragment to use to configure the gspread 'nose' tests.  Paste into the file 'test.config' : 
+    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
 
-        auth_type: OAuth
-        ;
-        ; These three values are obligatory for OAuth access, not required for UID/pwd access
-        client_secret: dZkFOCokPpIwE8WjWtsHJ4Dh
-        client_id: 181927152960-1525sfbj8lr7kh83q8q24f6rkijupfgk.apps.googleusercontent.com
-        refresh_token: 1/0ganAW-pDLac532zRHU6AjE8og99_mxHBmFGDu6I2QY
+    auth_type: OAuth
+    ;
+    ; These three values are obligatory for OAuth access, not required for UID/pwd access
+    client_secret: dZkFOCokPpIwE8WjWtsHJ4Dh
+    client_id: 181927152960-1525sfbj8lr7kh83q8q24f6rkijupfgk.apps.googleusercontent.com
+    refresh_token: 1/0ganAW-pDLac532zRHU6AjE8og99_mxHBmFGDu6I2QY
 
-        ; This value is optional but will make the tests start sooner if the token is less than 60 minutes old.
-        access_token: ya29.ggAIFzx08HBNfUcuNVK3Ws_82ktn-LLBSHVwHGimMPHU0c_N09OgHoDz
+    ; This value is optional but will make the tests start sooner if the token is less than 60 minutes old.
+    access_token: ya29.ggAIFzx08HBNfUcuNVK3Ws_82ktn-LLBSHVwHGimMPHU0c_N09OgHoDz
 
-         .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
-        Identify the Google spreadsheet you want to use; use the full URL ("http://" etc, etc) 
-        Paste the full URL here : <full Google Sheets URL here>
+    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
+    Identify the Google spreadsheet you want to use; use the full URL ("http://" etc, etc) 
+    Paste the full URL here : <full Google Sheets URL here>
         
 The penultimate step is to enter the URL of one your user's spreadsheets at the prompt, "Paste the full URL here : ".  A quick test file will have been generated :
 
-        A simple example file called gspread_HelloOAuthWorld.py was written to disk.
-        It lists the names of the sheets in the target spreadsheet.
-        Test it with:
-           $  python gspread_HelloOAuthWorld.py  ## or possibly just  ./gspread_HelloOAuthWorld.py
+    A simple example file called gspread_HelloOAuthWorld.py was written to disk.
+    It lists the names of the sheets in the target spreadsheet.
+    Test it with:
+       $  python gspread_HelloOAuthWorld.py  ## or possibly just  ./gspread_HelloOAuthWorld.py
 
-*"./gspread_HelloOAuthWorld.py"* is an extremely simple sample that you can use as starting point for more complex projects.
 [Top](#Steps)
   
 - - - - - - - - - - - - -
-<a name="Get permission on other user's spreadsheet."/>
-### Run .
+<a name="Running ./gspread_HelloOAuthWorld.py"/>
+### Running ./gspread_HelloOAuthWorld.py.
+
+*"./gspread_HelloOAuthWorld.py"* is an extremely simple sample that you can use as starting point for more complex projects.  You run it like this :
+
+    ./gspread_HelloOAuthWorld.py
+
+It connects to your user's spreadsheet and returns the name of the contained sheets, like this :
+
+    Found sheets:
+     - Sheet #1: Id = od6  Title = Sheet1
+
+
+
 
 [Top](#Steps)
 

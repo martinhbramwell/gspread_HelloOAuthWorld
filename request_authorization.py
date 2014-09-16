@@ -320,26 +320,6 @@ def prepare_result(credentials, google_creds_):
     testScript.write("\n#\n")
     testScript.close()
     os.chmod('gspread_HelloOAuthWorld.py', 0o770)
-
-    '''
-    #!/usr/bin/env python
-    # -*- coding: utf-8 -*-
-    import gspread
-    from GSpreadCredentials import GSpreadCredentials
-
-    from creds_oa import key_ring
-
-    cr = GSpreadCredentials (None, key_ring)
-    gc = gspread.authorize(cr)
-
-    wkbk = gc.open_by_url('https://docs.google.com/spreadsheet/ccc?key=0Ao882NWHcSjgdFJEcnVweWRoeWJQejI3WTZMTXE0OEE&usp=drive_web#gid=0')
-    cnt = 1
-    print 'Found sheets:'
-    for sheet in wkbk.worksheets():
-        print ' - Sheet #{}: Id = {}  Title = {}'.format(cnt, sheet.id, sheet.title)
-        cnt += 1
-    '''
-    
     #
     print "\n\n   A simple example file called gspread_HelloOAuthWorld.py was written to disk."
     print "   It lists the names of the sheets in the target spreadsheet."
@@ -395,7 +375,7 @@ def main():
     logger.debug('               Client secret : {}\n'.format(google_creds.installed.client_secret))
     open(parameters_file, 'a').close()
     confirmation = third_person_auth(google_creds, args.end_user_email)
-    print '\n Confirmation is :\n{}'.format(confirmation)
+
     prepare_result(confirmation, google_creds)
  
     return

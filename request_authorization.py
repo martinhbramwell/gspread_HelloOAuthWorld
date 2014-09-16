@@ -156,7 +156,7 @@ def third_person_auth(google_creds_, end_user_email_):
             if sr[0] == 530 :
                 if 'Authentication Required' in sr[1] :
                     print "  *    *   Do we get an 'invalid grant' error now ?   *    *    * "
-                    pass
+                    sys.exit("We got an 'invalid grant' error. Authentication Required.")
                     
                 print 'Refresh required: %s ' % google_project_client_smtp_refresh_token
                 print 'Client ID: %s, Secret: %s ' % (google_creds_.installed.client_id, google_creds_.installed.client_secret)
@@ -183,7 +183,7 @@ def getAsForDevices(credentials, google_creds_, end_user_email_) :
     
     print "\n\n* * * * *  You have to verify that you DO allow this software to open your Google document space."
     print     '* * * * *  Please check your email at %s.' % end_user_email_
-    print     '* * * * *  The message "%s" contains further instructions for you.' % subject
+    print     '* * * * *  The message, ["%s"]. contains further instructions for you.' % subject
 
     data = {}
 
@@ -253,51 +253,6 @@ def request_approval(credentials, end_user_email_) :
     smtp_conn.close()
 
 
-pth = os.path.realpath(__file__)
-PROG = pth.split(os.sep)[pth.count(os.sep)]
-
-desc = 'Get authorization from your remote user to access their OAuth product.'
-desc += '  The values are added to the file {}.'.format(parameters_file)
-desc += '  If file {} already has all the necessary parameters no'.format(parameters_file)
-desc += ' action is taken.'
-
-msg_c = "to drop and create new credentials"
-msg_k = "The identity key of a Google Spreadsheets workbook."
-msg_r = "Row in Tasks sheet at which to start processing."
-
-
-def get():
-
-    usage = "usage: {} [options] arg".format(PROG)
-    parser = argparse.ArgumentParser(description=desc, prog=PROG)
-    
-    msg_j = 'A json file of Google OAuth credentials from '
-    msg_j += 'https://console.developers.google.com/ » [APIs & auth] » '
-    msg_j += '[Credentials] » [Client ID for native application]'
-    parser.add_argument(
-        '-j'
-      , '--client_id_json'
-      , help=msg_j
-      , required=False
-    )
-    parser.add_argument(
-        '-e'
-      , '--client_email'
-      , help='Your full GMail address [e.g. your.addr@gmail.com]'
-      , default=None
-      , required=False
-    )
-    parser.add_argument(
-        '-m'
-      , '--test_mail'
-      , help='Send a test email? (True|False) Default = False'
-      , default=False
-      , required=False
-    )
-
-    return parser.parse_args()
-    
-
 def prepare_result(credentials, google_creds_):
 
     print "\n =    =    =    =    =    =    =    =    =    =    =    =    =    =   "
@@ -345,26 +300,26 @@ def prepare_result(credentials, google_creds_):
     print 'Identify the Google spreadsheet you want to use; use the full URL ("http://" etc, etc) '
     spreadsheet_url  = raw_input('Paste the full URL here : ')
     #
-    qiktest = open('qiktest.py', 'w')
-    qiktest.write("#!/usr/bin/env python")
-    qiktest.write("\n# -*- coding: utf-8 -*-")
-    qiktest.write("\nimport gspread")
-    qiktest.write("\nfrom GSpreadCredentials import GSpreadCredentials")
-    qiktest.write("\n#")
-    qiktest.write("\nfrom creds_oa import key_ring")
-    qiktest.write("\n#")
-    qiktest.write("\ncr = GSpreadCredentials (None, key_ring)")
-    qiktest.write("\ngc = gspread.authorize(cr)")
-    qiktest.write("\n#")
-    qiktest.write("\nwkbk = gc.open_by_url('{}')".format(spreadsheet_url))
-    qiktest.write("\ncnt = 1")
-    qiktest.write("\nprint 'Found sheets:'")
-    qiktest.write("\nfor sheet in wkbk.worksheets():")
-    qiktest.write("\n    print ' - Sheet #{}: Id = {}  Title = {}'.format(cnt, sheet.id, sheet.title)")
-    qiktest.write("\n    cnt += 1")
-    qiktest.write("\n#\n")
-    qiktest.close()
-    os.chmod('qiktest.py', 0o770)
+    testScript = open('gspread_HelloOAuthWorld.py', 'w')
+    testScript.write("#!/usr/bin/env python")
+    testScript.write("\n# -*- coding: utf-8 -*-")
+    testScript.write("\nimport gspread")
+    testScript.write("\nfrom GSpreadCredentials import GSpreadCredentials")
+    testScript.write("\n#")
+    testScript.write("\nfrom creds_oa import key_ring")
+    testScript.write("\n#")
+    testScript.write("\ncr = GSpreadCredentials (None, key_ring)")
+    testScript.write("\ngc = gspread.authorize(cr)")
+    testScript.write("\n#")
+    testScript.write("\nwkbk = gc.open_by_url('{}')".format(spreadsheet_url))
+    testScript.write("\ncnt = 1")
+    testScript.write("\nprint 'Found sheets:'")
+    testScript.write("\nfor sheet in wkbk.worksheets():")
+    testScript.write("\n    print ' - Sheet #{}: Id = {}  Title = {}'.format(cnt, sheet.id, sheet.title)")
+    testScript.write("\n    cnt += 1")
+    testScript.write("\n#\n")
+    testScript.close()
+    os.chmod('gspread_HelloOAuthWorld.py', 0o770)
 
     '''
     #!/usr/bin/env python
@@ -386,10 +341,48 @@ def prepare_result(credentials, google_creds_):
     '''
     
     #
-    print "\n\n   A simple example file called qiktest.py was written to disk."
+    print "\n\n   A simple example file called gspread_HelloOAuthWorld.py was written to disk."
     print "   It lists the names of the sheets in the target spreadsheet."
     print "   Test it with:"
-    print "      $  python qiktest.py  ## or possibly just  ./qiktest.py\n\n\n"
+    print "      $  python gspread_HelloOAuthWorld.py  ## or possibly just  ./gspread_HelloOAuthWorld.py\n\n\n"
+
+pth = os.path.realpath(__file__)
+PROG = pth.split(os.sep)[pth.count(os.sep)]
+
+desc = 'Get authorization from your remote user to access their OAuth product.'
+desc += '  The values are added to the file {}.'.format(parameters_file)
+desc += '  If file {} already has all the necessary parameters no'.format(parameters_file)
+desc += ' action is taken.'
+
+msg_c = "to drop and create new credentials"
+msg_k = "The identity key of a Google Spreadsheets workbook."
+msg_r = "Row in Tasks sheet at which to start processing."
+
+
+def get():
+
+    usage = "usage: {} [options] arg".format(PROG)
+    parser = argparse.ArgumentParser(description=desc, prog=PROG)
+
+    msg_j = 'A json file of Google OAuth credentials from '
+    msg_j += 'https://console.developers.google.com/ » [APIs & auth] » '
+    msg_j += '[Credentials] » [Client ID for native application]'
+    parser.add_argument(
+        '-j'
+      , '--client_id_json'
+      , help=msg_j
+      , required=False
+    )
+    parser.add_argument(
+        '-e'
+      , '--end_user_email'
+      , help='The full GMail address of the other user whose permission you require.[e.g. your.friend@gmail.com]'
+      , default=None
+      , required=True
+    )
+
+    return parser.parse_args()
+
 
 
     
@@ -401,7 +394,7 @@ def main():
     google_creds = loadGoogleJSON.getCreds(args.client_id_json)
     logger.debug('               Client secret : {}\n'.format(google_creds.installed.client_secret))
     open(parameters_file, 'a').close()
-    confirmation = third_person_auth(google_creds, "<dude.awap@gmail.com>")
+    confirmation = third_person_auth(google_creds, args.end_user_email)
     print '\n Confirmation is :\n{}'.format(confirmation)
     prepare_result(confirmation, google_creds)
  

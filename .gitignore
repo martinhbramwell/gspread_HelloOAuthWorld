@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.py~
 
 # C extensions
 *.so
@@ -36,6 +37,7 @@ coverage.xml
 
 # Translations
 *.mo
+*.md~
 
 # Mr Developer
 .mr.developer.cfg

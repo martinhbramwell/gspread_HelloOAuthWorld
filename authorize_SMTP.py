@@ -314,8 +314,9 @@ def main():
     args = get()
 
     creds = loadGoogleJSON.getCreds(args.client_id_json)
-    open(parameters_file, 'a').close()
-    oauth_credentials = prep_smtp(creds, args.client_email, args.test_mail)
+    if creds != None:
+      open(parameters_file, 'a').close()
+      oauth_credentials = prep_smtp(creds, args.client_email, args.test_mail)
     return
 
 if __name__ == '__main__':

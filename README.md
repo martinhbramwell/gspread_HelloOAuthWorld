@@ -2,7 +2,7 @@ Hello OAuth World for GSpread
 =============================
 
 
-Currently, GSpread's documentation for its authorize() method does little more than tell you to read Google's manuals.  If you have small experience with OAuth, this can be a big problem, as in  -- many days down the drain.
+Currently, GSpread's documentation for the authorize() method does little more than tell you to read Google's manuals.  If you have small experience with OAuth, this can be a big problem, as in  -- many days down the drain.
 
 This example should get you going quickly, as long as you already have Python running in Ubuntu.  Everything else is explained step by step.
 
@@ -46,6 +46,7 @@ Here are the steps :
   1. [Resolve Dependencies](#Resolve Dependencies)
   1. [Get Developer Credentials](#Get Developer Credentials)
   1. [Authenticate and self-authorize GMail SMTP use.](#Authenticate and self-authorize GMail SMTP use.)
+  1. [Get permission on other user's spreadsheet.](#Get permission on other user's spreadsheet.)
   2. 
   3. 
 
@@ -130,6 +131,15 @@ Go back to where you were before
 <a name="Resolve Dependencies"/>
 ### Resolve Dependencies
 
+The application has a few external dependencies.  Now is the time to go get them.
+
+Make sure you are "in" the virtual enviroment:
+
+     workon hiOAWorld
+     
+Now you can safely install the dependencies:
+
+     pip install progressbar2 gspread httplib2
 
 [Top](#Steps)
 
@@ -144,18 +154,18 @@ Follow these steps for [Obtaining Authentication Credentials from Google's new s
 
 You will need to save the file *"client_secret_xxx...xxx.apps.googleusercontent.com.json"* in the directory *"~/disposable/gspread_HelloOAuthWorld"*.
 
-[Top](#Steps)
 
+[Top](#Steps)
   
 - - - - - - - - - - - - -
-<a name="Authenticate and self-authorize GMail SMTP use."/>
+<a name="Authenticate and self-authorize GMail SMTP use"/>
 ### Authenticate and self-authorize GMail SMTP use.
-
+  
 Run the program [authorize_SMTP.py](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/blob/master/authorize_SMTP.py)
     
     ./authorize_SMTP.py 
     
-Since this is the first time you run it, it will ask for all details.  It remembers them so that you have less to do on subsequent operations.
+The first time you run it, it will ask for all details.  It remembers them so that you have less to do on subsequent operations.
 
     No valid token pair found in working_parameters.py. Will run the wizard.
     Enter the GMail address you want to authorize : *<enter a GMail address here>*
@@ -204,8 +214,91 @@ Also, a new file is written to disk, available to the next step.  *"working_para
      #
 
 
+[Top](#Steps)
+  
+- - - - - - - - - - - - -
+<a name="Get permission on other user's spreadsheet."/>
+### Get permission on other user's spreadsheet.
+
+Now that we can send email through Google SMTP, we can request access to Google products of other users.
+
+Run the following command, replacing *[some.other.user.name@gmail.com]* for the GMail address of a real user, of course :
+
+     ./request_authorization.py  -e some.other.user.name@gmail.com
+     
+Text like the following will be displayed :
+
+     Sending permission request . . . 
+      . . permission request sent!
+
+
+     * * * * *  You have to verify that you DO allow this software to open your Google document space.
+     * * * * *  Please check your email at some.other.user.name@gmail.com.
+     * * * * *  The message, [doowa.diddee@gmail.com wants permission to access your Google Spreadheets with "gspread".] contains further instructions for you.
+     Trying to get tokens.
+     |>>>>            | Elapsed Time: 0:06:33 |             <<<<<|
+     
+Your user will see an email like this :
+
+<p align="center">
+  <img src="http://i.imgur.com/mD9jQtb.png" alt="http://imgur.com/delete/NxuM5YDOkoSCuz5"/>
+</p>
+
+They will copy the indicated code and paste it into a screen like this :
+
+<p align="center">
+  <img src="http://i.imgur.com/prCopC0.png" alt="http://imgur.com/delete/A45XpQGOdGlCPse"/>
+</p>
+
+Your user will approve by clicking the blue button . . .
+
+<p align="center">
+  <img src="http://i.imgur.com/MMKrulr.png" alt="http://imgur.com/delete/WhPW9zaIZJleq9H"/>
+</p>
+
+. . . and see a confirmation screen like this :
+
+<p align="center">
+  <img src="http://i.imgur.com/b85wiew.png" alt="http://imgur.com/delete/PBcmu0ueLIFWHb7"/>
+</p>
+
+
+If your user takes longer than 30 minutes you'll have to try again.
+
+If your user does approve the *"./request_authorization.py"* program will continue to the next step with a screen like this :
+
+        Code fragment to use to configure the gspread 'nose' tests.  Paste into the file 'test.config' : 
+        .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
+
+        auth_type: OAuth
+        ;
+        ; These three values are obligatory for OAuth access, not required for UID/pwd access
+        client_secret: dZkFOCokPpIwE8WjWtsHJ4Dh
+        client_id: 181927152960-1525sfbj8lr7kh83q8q24f6rkijupfgk.apps.googleusercontent.com
+        refresh_token: 1/0ganAW-pDLac532zRHU6AjE8og99_mxHBmFGDu6I2QY
+
+        ; This value is optional but will make the tests start sooner if the token is less than 60 minutes old.
+        access_token: ya29.ggAIFzx08HBNfUcuNVK3Ws_82ktn-LLBSHVwHGimMPHU0c_N09OgHoDz
+
+         .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
+        Identify the Google spreadsheet you want to use; use the full URL ("http://" etc, etc) 
+        Paste the full URL here : <full Google Sheets URL here>
+        
+The penultimate step is to enter the URL of one your user's spreadsheets at the prompt, "Paste the full URL here : ".  A quick test file will have been generated :
+
+        A simple example file called gspread_HelloOAuthWorld.py was written to disk.
+        It lists the names of the sheets in the target spreadsheet.
+        Test it with:
+           $  python gspread_HelloOAuthWorld.py  ## or possibly just  ./gspread_HelloOAuthWorld.py
+
+*"./gspread_HelloOAuthWorld.py"* is an extremely simple sample that you can use as starting point for more complex projects.
+[Top](#Steps)
+  
+- - - - - - - - - - - - -
+<a name="Get permission on other user's spreadsheet."/>
+### Run .
 
 [Top](#Steps)
 
-asdfasdf
+
 

@@ -43,6 +43,7 @@ Here are the steps :
 
   1. [Get the code](#Get the code)
   1. [Start up a Virtual Environment](#Start up a Virtual Environment)
+  1. [Resolve Dependencies](#Resolve Dependencies)
   1. [Get Developer Credentials](#Get Developer Credentials)
   1. [Authenticate and self-authorize GMail SMTP use.](#Authenticate and self-authorize GMail SMTP use.)
   2. 
@@ -124,7 +125,15 @@ Go back to where you were before
 
 [Top](#Steps)
 
-  
+
+- - - - - - - - - - - - -
+<a name="Resolve Dependencies"/>
+### Resolve Dependencies
+
+
+[Top](#Steps)
+
+
 - - - - - - - - - - - - -
 <a name="Get Developer Credentials"/>
 ### Get Developer Credentials
@@ -133,6 +142,7 @@ The included utility [loadGoogleJSON.py](https://github.com/martinhbramwell/gspr
 
 Follow these steps for [Obtaining Authentication Credentials from Google's new style API Console](https://github.com/martinhbramwell/gspread_HelloOAuthWorld/wiki/Obtaining-Authentication-Credentials-from-Google's-new-style-API-Console).
 
+You will need to save the file *"client_secret_xxx...xxx.apps.googleusercontent.com.json"* in the directory *"~/disposable/gspread_HelloOAuthWorld"*.
 
 [Top](#Steps)
 
@@ -172,6 +182,27 @@ Copy that url into a browser, follow the steps, then get the verification code a
 <p align="center">
   <img src="http://i.imgur.com/ZaSKGlS.png" alt="http://imgur.com/delete/XUaxsXgqrqnfIar"/>
 </p>
+
+Shortly after pasting the code and hitting [Enter] the following should appear :
+
+      Success :
+       - Access Token: = ya29.gQB-6n3zy3BzENT3w9Bs4F97s-i6TdoNd_3Gpk5PHtpfwZgmVlAofiGA
+       - Refresh Token: 1/RevA7ZIJdKPaXVidCBRuyv93jv3FWRkSBs5l8qkv5wM
+       - Access Token expires at : 2014-09-15 17:39
+      Appending latest tokens to the bottom of the file "working_parameters.py". . . 
+       . . done.
+
+      No test mail sent.
+
+Also, a new file is written to disk, available to the next step.  *"working_parameters.py"* contains : 
+
+     # Appended automatically . . . 
+     google_project_client_smtp_access_token = 'ya29.gQB-6n3zy3BzENT3w9Bs4F97s-i6TdoNd_3Gpk5PHtpfwZgmVlAofiGA'
+     google_project_client_smtp_refresh_token = '1/RevA7ZIJdKPaXVidCBRuyv93jv3FWRkSBs5l8qkv5wM'
+     google_project_client_smtp_expiry = '2014-09-15 17:39'
+     google_project_client_email = 'doowa.diddee@gmail.com'
+     #
+
 
 
 [Top](#Steps)

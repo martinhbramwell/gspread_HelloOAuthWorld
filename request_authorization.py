@@ -255,23 +255,6 @@ def request_approval(credentials, end_user_email_) :
 
 def prepare_result(credentials, google_creds_):
 
-    print "\n =    =    =    =    =    =    =    =    =    =    =    =    =    =   "
-    print "\n\n Code fragment to use to configure the gspread 'nose' tests.  Paste into the file 'test.config' : "
-    print " .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . "
-    print ""
-    print "auth_type: OAuth"    
-    print ";"
-    print "; These three values are obligatory for OAuth access, not required for UID/pwd access"
-    print "client_secret: {}".format(google_creds_.installed.client_secret)
-    print "client_id: {}".format(google_creds_.installed.client_id)
-    print "refresh_token: {}".format(credentials.oauth_refresh_token)
-    print ""
-    print "; This value is optional but will make the tests start sooner if the token is less than 60 minutes old."
-    print "access_token: {}".format(credentials.oauth_access_token)
-    print ""
-    print " .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . "
-
-
     creds_oa = open('creds_oa.py', 'w')
     creds_oa.write("\nrefresh_token = '{}'".format(credentials.oauth_refresh_token))
     creds_oa.write("\nclient_secret = '{}'".format(google_creds_.installed.client_secret))

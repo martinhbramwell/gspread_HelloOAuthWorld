@@ -258,32 +258,18 @@ Your user will approve by clicking the blue button . . .
 . . . and see a confirmation screen like this :
 
 <p align="center">
-  <img src="http://i.imgur.com/b85wiew.png" alt="http://imgur.com/delete/PBcmu0ueLIFWHb7"/>
+  <img src="http://i.imgur.com/kX1nLEl.png" alt="http://imgur.com/delete/P9HHH6DzLbuEp5o"/>
 </p>
 
 
 If your user takes longer than 30 minutes you'll have to try again.
 
-If your user does approve the *"./request_authorization.py"* program will continue to the next step with a screen like this :
+If your user does approve your request then the *"./request_authorization.py"* program will continue to the next step with a screen like this :
 
-    Code fragment to use to configure the gspread 'nose' tests.  Paste into the file 'test.config' : 
-    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
-
-    auth_type: OAuth
-    ;
-    ; These three values are obligatory for OAuth access, not required for UID/pwd access
-    client_secret: dZkFOCokPpIwE8WjWtsHJ4Dh
-    client_id: 181927152960-1525sfbj8lr7kh83q8q24f6rkijupfgk.apps.googleusercontent.com
-    refresh_token: 1/0ganAW-pDLac532zRHU6AjE8og99_mxHBmFGDu6I2QY
-
-    ; This value is optional but will make the tests start sooner if the token is less than 60 minutes old.
-    access_token: ya29.ggAIFzx08HBNfUcuNVK3Ws_82ktn-LLBSHVwHGimMPHU0c_N09OgHoDz
-
-    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
     Identify the Google spreadsheet you want to use; use the full URL ("http://" etc, etc) 
     Paste the full URL here : <full Google Sheets URL here>
         
-The penultimate step is to enter the URL of one your user's spreadsheets at the prompt, "Paste the full URL here : ".  A quick test file will have been generated :
+Enter the URL of one your user's spreadsheets at the prompt, "Paste the full URL here : ".  A quick test file will be generated :
 
     A simple example file called gspread_HelloOAuthWorld.py was written to disk.
     It lists the names of the sheets in the target spreadsheet.

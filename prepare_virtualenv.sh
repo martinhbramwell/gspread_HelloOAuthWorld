@@ -11,31 +11,13 @@ if [ "$(id -u)" != "0" ]; then
 fi
 #
 YOU=$(logname)
-# Make a temorary directory for installers
-mkdir -p ~/deleteMe
-#
-# Step into it
-pushd ~/deleteMe
-#
-# Install curl if it isn't present
-apt-get install curl
-#
-# Use  curl to the pip installer toolkit
-curl -O http://python-distribute.org/distribute_setup.py
-python distribute_setup.py
 #
 # Install pip
-easy_install pip
+apt-get install python-pip
 #
 # Use pip to install the virtual environment stuff
 pip install virtualenv
 pip install virtualenvwrapper
-#
-# Get out of the temporary directory
-popd
-#
-# Delete the temporary directory
-rm -fr ~/deleteMe
 #
 # Create a default directory for virtualized projects
 export WORKON_HOME=~/.python_virtual_environments
